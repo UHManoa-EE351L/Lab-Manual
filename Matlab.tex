@@ -1,0 +1,180 @@
+% LAB 1:
+% Matlab Intro
+
+\Opensolutionfile{MatlabSolutions}
+% \begin{solmatlab}
+% \end{solmatlab}
+
+\chapter{MATLAB Structure and Use} \label{ch.Matlab}
+
+This first laboratory session is an introduction to the MATLAB programming suite.  Basic interface, operations, functions, and programming techniques are covered.  Students will complete tasks that demonstrate the advantages of using MATLAB in engineering modeling, testing, and analysis.
+
+\section{Pre-Lab Assignment}
+Many of the key features---some would say \textit{quirks}---of MATLAB are described in detail in Appendix \ref{app:matlaboverview}.  Students should first consult this appendix to ensure that they are familiar with MATLAB to complete this experiment.
+
+\section{Warm-Up Assessment}
+Take about ten minutes to complete the following assignment.  The first time you need help, ask you neighboring students for their recommendation.  The second time you need help, call the instructor over for assistance.
+\par
+Write a script that takes a large vector (at least 100 elements) of your creation and performs the following tasks:
+\begin{enumerate}
+\item Display the length of the vector and its minimum and maximum values.
+\item Display the statistical mean and mode.  If the mode is not uniquely defined, display a message that indicates this.
+\item Find the sum of all elements that are less than $1$.
+\item Sort the elements of your vector from low to high and plot them against a time scale of the same length as your vector.  Create appropriate labels on the plot.
+\item Take the Fourier transform of your sorted vector (\verb=fft= is fine).  Create two new plots: one for the magnitude and another for the phase.
+\end{enumerate}
+
+\section{Laboratory Procedure}
+The procedure of this experiment consists of the student reproducing the examples in the tutorial (Appendix \ref{app:matlaboverview}) to gain familiarity and confidence with MATLAB.  Later, the students are asked to demonstrate their understanding with some exercises.
+
+\subsection{Starting MATLAB Session}
+\begin{enumerate}
+    \item Log on and start MATLAB.  Change the display format with \verb=format compact=.
+    \item Clear the Command Window using \verb=clc=
+    \item In the Command Window, write your name, the date and the lab session as comments.
+\end{enumerate}
+
+\subsection{MATLAB Statements}
+\begin{enumerate}
+    \item Reproduce the examples from Section \ref{sec.matlab.statements}.
+    \item Enter some data and create some variables of your own using the concepts in Section \nolinebreak[3] \ref{sec.matlab.statements}.
+    \item Print the Command Window and show it to the instructor.
+\end{enumerate}
+
+The remainder of the experiment should be completed using m-files.  If it is not already, the Editor may be opened with the command \verb=edit=.  Using the debugging mode of the Editor will help in writing your scripts.  One can set break points, indicated by a red dot, to run the code from the beginning to a specific line.  After finishing with break points, click the ``Exit Debug Mode'' menu button.
+
+\subsection{Numeric Format and Variables}
+\begin{enumerate}
+    \item Create and enter some complex numbers of your own using the concepts in Section \ref{sec.matlab.numform}.
+    \item Reproduce the examples of matrices and vectors in the section on arrays in \nolinebreak[3] \ref{sec.matlab.array}.
+    \item Use the MATLAB command \verb=roots= to find the roots of the polynomial $2x^2+4x+10$.  Manually verify your answer by using the quadratic formula.
+    \item Reproduce the character string example from Section \nolinebreak[3] \ref{sec.matlab.string}.
+    \item Create the character string variable
+        \begin{verbatim}
+        c = `All your base are belong to us'
+        \end{verbatim}
+        Now print the statement
+        \begin{verbatim}
+        All your songs belong to us
+        \end{verbatim}
+        by only selecting the needed letters and spaces from the variable \verb=c=.
+\end{enumerate}
+
+\subsection{Arithmetic Operations}
+\begin{enumerate}
+    \item Reproduce the examples from Section \ref{sec.matlab.arithop}.
+    \item Find the matrix resulting from $A-BC^2+2D^\prime$ where:
+    \begin{gather*}
+    A = \left[ \begin{array}{rr} 1.5&3.3\\6&-4.5\\-2.5&0.7\end{array} \right], \qquad B=\left[\begin{array}{rr}0.5&0.3\\-0.1&0.2\\0.4&-0.3\end{array} \right] \\
+    C = \left[\begin{array}{rr}1&2\\1&2\end{array}\right], \qquad
+    D = \left[\begin{array}{rrr}3.1&1.4&-0.3\\-0.5&1.6&0.1\end{array} \right]
+    \end{gather*}
+    \item We define the element of matrix $a$ in row $i$ and column $j$ as $a_{ij}$.  Use array operations to find $b_{ij}-c_{ij}d_{ij}^4$ for all $i$ and $j$ for your choice of three 2x3 arrays $b$, $c$, and $d$.  Manually verify the result for $i=1$ and $j=2$.
+\end{enumerate}
+
+\subsection{Function m-Files} \label{sec.matlab.func}
+The input-output characteristics of a script m-file make it very impractical to use as a subroutine within a program.  Function m-files are useful for this purpose since they can be created with input and/or output variables.  No variables remain in the Workspace after a function m-file has completed.  As such, data must be passed back out or saved with a \verb=save= statement within the function if it is to be used again.
+\begin{enumerate}
+    \item Read (but not necessarily reproduce) Section \ref{sec.matlab.funcs}.
+    \item Create a function called \verb=sumsin= that sums two sinusoids.  The inputs should be \verb=t=, \verb=f1=, \verb=f2=.  The outputs should be $s_1=\sin(2\pi f_1t)$, $s_2=\sin(2\pi f_2t)$, and $s_3 = s_1+s_2$.
+\end{enumerate}
+To test your function you may wish to call it in the Command Window.  To do this, define two fre\-quencies and an appro\-pri\-ate time span and issue the com\-mand
+\begin{verbatim}
+[s1 s2 s3] = sumsin(t,f1,f2);
+\end{verbatim}
+If there are no errors, you may assume that your function works correctly.
+
+\subsection{Logical Operators}
+\begin{enumerate}
+    \item Reproduce the logical operator examples in Section \ref{app.oper.logic}.
+    \item In a script m-file, use logical and array operations to produce $b$ from $a$ where
+    \begin{equation*}
+    a=\left[ \begin{array}{rrr}
+        1.2 &   -3.2    &   24\\
+        0.6 &   -0.3    &   -0.5\\
+        -2.3&   1.6     &   20   \end{array} \right]
+    \quad \mbox{and} \quad
+    b= \left[ \begin{array}{rrr}
+        1.2 &   0   &   0\\
+        0   &   -0.6&   -1 \\
+        0   &   1.6 &   0 \end{array} \right]
+    \end{equation*}
+\end{enumerate}
+
+\subsection{Mathematical Operations}
+\begin{enumerate}
+    \item Read and reproduce some of the MATLAB math functions in Section \ref{sec.matlab.mathop}.
+    \item Try the three functions \verb=round=, \verb=floor=, and \verb=ceil= on
+        \begin{equation*}
+        x= \left[ \begin{array}{rrrrrrrr}-3.6&-2.5&-1.4&-1&0&1.4&2.5&3.6 \end{array}\right]
+        \end{equation*}
+    to observe their characteristics.
+    \item Find the value of $x$ when
+        \begin{equation*}
+        x=\frac{\ln \left[2+\sin^2(3)\right] + e^{-0.2}}{\sqrt{2^{1.6}+3^{-0.5}}}
+        \end{equation*}
+    \item If $t$ varies from $-1.2$ to $1.2$ in steps of $0.4$, find:
+        \begin{enumerate}
+        \item $w(t) = 3t^3+2t^2-t+\sin t$
+        \item $x(t) = \left\{ \begin{array}{ll}0,&t<0\\2,& t\geq0 \end{array} \right.$
+        \end{enumerate}
+\end{enumerate}
+
+\subsection{Flow Control Statements}
+\begin{enumerate}
+    \item Reproduce the examples in Section \ref{sec.matlab.flowcont}.
+    \item Use \verb=for= statements to find the values of $x(t)= 3\cos(2\pi f t+0.1)$ for $t=0,0.1,0.2,$ and $0.4$ seconds when $f = 10, 15,$ and $20$ Hz.  Use one set of statements to compute the values for all three frequencies and store the results in a two-dimensional array.  (Hint: use nested loops.)  What is the value when $x(0.3)$ when $f=15$ Hz?
+    \item Use \verb=while= statements to find the largest value of positive $t$ for which $e^{1.2}\cos(\omega t)$ and $t^3$ are both less than $10$.  Make the computation for $\omega\in\{35,40,45\}$ and find the solution to the nearest 0.01.
+    \item Evaluate $x(t) = e^{-|t|}$ for $-1\leq t \leq 1$ in steps of 0.2 using \verb=for= and \verb=if= statements.  Your logical test will likely be something like \verb=if t < 0= then do ``this,'' \verb=else= do ``that''.  Repeat the computation using logical operations and 0-1 (logical) arrays.  Here you will want to produce a vector with ones in the same places that the time vector is negative and zeros where the time vector is positive.  Now reduce the step size to 0.0002.  Do not print the values of $x(t)$ to the Command Window as there are 10,001 of them.  Be sure to initialize the array first.  Do you notice a difference in computation times between the two methods?  How does the step size affect the computation time?
+\end{enumerate}
+
+\subsection{Numerical and Data Analysis}
+\begin{enumerate}
+    \item Use some of the commands in Table \ref{tab.dataanalysis} (Section \nolinebreak[3] \ref{sec.matlab.dataana}) on the array
+        \begin{equation*}
+        a = \left[ \begin{array}{cccccc}
+                    1&0&2&3&0&4\\
+                    4&0&3&2&0&1\\
+                    1&2&3&4&0&0 \end{array} \right]
+        \end{equation*}
+    Be sure to practice the functions on both dimensions.
+    \item Create an 11-element vector for the values of $x(t) = 4\cos(2\pi t+0.2) + 3\sin(\pi^2 t)$ at equally spaced times in the interval $0\leq t \leq 1$.  \textit{Without printing the vector}, find:
+    \begin{enumerate}
+        \item The maximum element value
+        \item The minimum element value
+        \item The average value of the elements
+        \item The indices for which the element magnitude is greater than 4
+    \end{enumerate}
+    Check your results manually by printing the vector.
+    \item Given the array:
+        \begin{equation*}
+        A = \left[ \begin{array}{cccc}1&4&3&2\\4&1&2&5\\3&3&5&1 \end{array} \right]
+        \end{equation*}
+    use MATLAB statements to find:
+        \begin{enumerate}
+        \item The number of rows and columns in $A$
+        \item The maximum and minimum element values in $A$
+        \item The maximum and minimum element values in each row of $A$
+        \item The average value in each column
+        \item The average of all element values
+        \end{enumerate}
+\end{enumerate}
+
+\subsection{Plotting Functions}
+\begin{enumerate}
+    \item Create a script that uses the sum of sinusoids function created in Section \ref{sec.matlab.func} and plot the output signals.  Suggested values are $t\in[0,10]$ and 0.2 and 0.425 Hz.  Plot all three signals on the same axis.  Create appropriate axis labels, title, and legend.
+    \item In a new figure window, plot all three sinusoids on separate axes but in the same window.  Create appropriate labels.
+\end{enumerate}
+
+\section{Take-Home Assignment}
+Write a function m-file that accomplishes the tasks outlined below.  Save your function as your last name followed by your first initial and \verb=Lab1=.  For example, if your name is Kane Warrior, then your function should be called \verb=WarriorKLab1.m=.
+\par
+The function should take as its input a vector of arbitrary length and a time step value.  If this vector represents discrete values of a function $x(t)$, the function should return the derivative and integral as functions of time: $\dot{x}(t)$ and $\int_0^t x(s)ds$.  Also, in the same figure, the function should output graphs of the function, its derivative, and its integral on separate axes.  These plots should be labeled nicely.
+\par
+Kane Warrior's first line in his script would look like this:
+\begin{verbatim}
+function    [xdot integ] = WarriorKLab1(x,deltat)
+\end{verbatim}
+Of course Kane would be encouraged to write a short introduction or help section for his function.
+
+\Closesolutionfile{MatlabSolutions}

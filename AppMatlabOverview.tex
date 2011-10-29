@@ -1,0 +1,157 @@
+%Appendix Matlab Overview
+\appendix
+\chapter{MATLAB Overview} \label{app:matlaboverview}
+
+This appendix provides a broad overview of a few choice features of MATLAB.  It should be pointed out, however, that MATLAB is both a programming language as well as a software suite.  Thus it is just as appropriate to refer to ``MATLAB code'' as to ``open MATLAB.''
+\par
+The choice of which features to include here primarily results from their usefulness in the 351L laboratory.  Deeper help on these topics as well as the myriad of other functions in MATLAB can be obtained from a number of outside references.
+
+\section{Basic MATLAB Interface}
+The MATLAB desktop consists of four basic windows:
+\begin{itemize}
+    \item Command Window
+    \item Command History
+    \item Current Directory
+    \item Workspace
+\end{itemize}
+A fifth important window can be opened by typing \verb=edit= at the command prompt ($>>$).  When running experiments with many windows open, it is sometimes helpful to dock the Editor into the MATLAB desktop.  The Editor window has an icon similar to \rotatebox{45}{\Pifont{pzd}\ding{230}} that can be used to dock it with the main MATLAB desktop.
+\par
+The Command Window is useful for executing files or making quick calculations.  Lengthy processes are better suited to be written in a script---more on that later.  The Command Window may be cleared by issuing the command \verb=clc=.
+\par
+The Command History logs all of the actions executed in the Command History as well as sign-in and exit times from MATLAB.  It is most useful for finding commands issued previously if there is a lot of output cluttering the Command Window.  Also, you may select several lines from the command history and drag them into the Editor if you wish to save them into a script.
+\par
+The Current Directory should be familiar to Windows users.  It should be noted, however, that MATLAB can only execute scripts from the Current Directory (and subdirectories) and the MATLAB root directory.  Thus if you wrote code for Lab 1 and wanted to run it in your Lab 2 directory, it would be easiest to copy-paste the file.
+\par
+The Workspace lists all of the variables and their type that are currently active.  To clear the Workspace, use the command \verb=clear all=.  To delete a certain variable (call it \verb=var=), use \verb=clear var=.  Also note that clearing the Command Window does not clear the Workspace and vice-versa.
+
+\subsection{Statements}
+Statements are entered in the Command Window at the command prompt: $>>$.  The comment symbol in MATLAB is the percent sign: \%.  When MATLAB encounters this symbol, it ignores the remaining text on that line.  Comments are useful for creating ``headers'' for scripts.  It is recommended that you include some authorship information in every script you write.
+\par
+An example:
+\begin{verbatim}
+>> % Kane Warrior
+>> % Lab 1, Section 2
+>> % Data Analysis and Plotting Script
+>> % 17 July 2008
+\end{verbatim}
+\par
+Results from statements issued are be default stored in the single variable named \verb=ans=.  This variable will show up in the Workspace and appear in the Command Window:
+\begin{verbatim}
+>> 3.45                         <Enter>
+ans =
+        3.34500
+>>
+\end{verbatim}
+\par
+Pressing the \textit{Enter} key causes MATLAB to execute the statement in the command prompt.
+\begin{verbatim}
+>> sqrt(1.44)                   <Enter>
+ans =
+        1.2000
+>>
+\end{verbatim}
+\par
+If a statement is too long for a single line, one may issue a carriage return by typing three periods (\verb=...=) and then the \textit{Enter} key.
+\begin{verbatim}
+>> 2+6.35+sqrt(36) ...          <Enter>
++sqrt(49)                       <Enter>
+ans =
+        21.3500
+>>
+\end{verbatim}
+\par
+From now on the explicit typing of \verb=<Enter>= will be assumed to be understood and therefore omitted.
+\par
+Multiple statements may be issued on one line by separating them with a comma.  The statements are executed from left to right.
+\begin{verbatim}
+>> clear all
+>> 5, ans+1.1
+ans =
+        6.1000
+>>
+\end{verbatim}
+\par
+Variables are user-defined entities that allow the saving and recalling of information throughout a MATLAB session.  Variables may be named according to certain conventions, the most important of which is that they must begin with a letter.  All variables currently active appear in the Workspace.  A quick list of all of the variable names can be produced in the Command Window with the \verb=who= command.  A more complete table with variable names, dimensions, sizes, and classes is obtained by using the plural form: \verb=whos=.
+\par
+Statements that are terminated with a semicolon (\verb=;=) are executed, but the results are not shown in the Command Window.  Any variables assigned are saved and may be displayed by typing that variable's name subsequently:
+\begin{verbatim}
+>> a=25; b=sqrt(a)+2.5;
+>>
+>> a, b
+a =
+        25
+b =
+        7.5000
+>>
+\end{verbatim}
+
+\subsection{Help}
+MATLAB's biggest advantage over other programming languages is its library of functions.  To aid users in finding a function, MATLAB has two \uline{very} useful commands.
+\par
+To see a list of functions that have a certain word in the title or description, use the \verb=lookfor= command.
+\begin{verbatim}
+>> lookfor sinc
+DIRIC   Dirichlet, or periodic sinc function
+SINC    Sin(pi*x)/(pi*x) function.
+INVSINC Desired amplitude and frequency response for invsinc filters
+>>
+\end{verbatim}
+\par
+To get explicit information on a single function whose name is known, the \verb=help= function is extremely useful.  It produces the syntax and purpose of every function in the MATLAB library.  A simple example:
+\begin{verbatim}
+>> help sqrt
+SQRT        Square root.
+    SQRT(X) is the square root of the elements of X.  Complex
+    results are produced if X is not positive.
+
+    See also sqrtm.
+>>
+\end{verbatim}
+
+\subsection{M-Files}
+Files with extension \textbf{.m} are executable in MATLAB.  There are two flavors of m-files: Script and Function.  All m-files contain plain text, and as such can be edited with any text editor.  MATLAB provides a customized text editor, as discussed above.  However, you may read, write, and edit m-files with any plain text editor (such as Notepad, WinEdt, or emacs).
+
+\subsubsection{Scripts}
+Scripts are helpful because they can lump dozens or even thousands of Command Line statements into a single action.  The conventions for naming scripts are very similar to those for naming variables:
+\begin{itemize}
+    \item \textbf{Do Not} begin filenames with numbers
+    \item \textbf{Do Not} include punctuation anywhere in filenames
+    \item \textbf{Do Not} use a filename that is already used for a MATLAB function or an existing variable
+\end{itemize}
+
+There are a few useful shortcut keys when writing and debugging scripts.  The \verb=F5= key saves and executes the entire active script.  When dealing with long files, it is often useful to execute only the code you have just written. The \verb=F9= key executes only the text that is currently highlighted.
+
+\subsubsection{Functions}
+There are thousands of functions in the MATLAB library.  However, one may find it necessary to write a new function---often a collection of other functions---to suit one's specific needs.  Just like MATLAB native functions, user-defined functions have a strict yet simple syntax.  To define a new function, there are four essential components that must be the first executable line in the m-file:
+\begin{itemize}
+    \item The MATLAB command \verb=function=
+    \item Output variables
+    \item The user-defined function name
+    \item Input variables
+\end{itemize}
+
+Output variables are contained in [square brackets] and separated by commas. Input variables are contained in (parentheses) and also separated by commas.  Comments may appear above the line containing the \verb=function= command, and these will appear when the \verb=help= command is issued in relation to this new function.  An illustrative example follows:
+\begin{verbatim}
+% Kane Warrior
+% 17 July 2008
+%
+% VECTOR function
+% INPUTS:
+% x     A complex number
+%
+% OUTPUTS:
+% m     Magnitude of x
+% theta Angle of x in degrees counterclockwise from positive Real axis
+%
+
+function [m,theta] = vector(x)
+
+m=abs(x);                  %Use the native function abs.
+theta=angle(x)*180/pi;     %Use the native function angle and convert from
+                                radians to degrees.
+\end{verbatim}
+
+\subsection{Storage and Retrieval Commands}
+Data can be stored as variables, which can then be saved to memory.  The syntax is: \mbox{\ttfamily save \textit{filename <variables>}}.  This saves the variables listed in \mbox{\ttfamily \textit{<variables>}}---separated by spaces---as a file called \verb=filename.mat= in the current directory.  If no variables are specified, all of the variables in the Workspace are saved.
+\par
+Upon clearing the Workspace, the variables can be restored by issuing \mbox{\ttfamily load \textit{filename}}.  This will restore the variables saved in \verb=filename.mat= to the workspace and overwrite any existing variables with the same name.

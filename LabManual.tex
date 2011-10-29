@@ -1,0 +1,193 @@
+\documentclass[twoside]{report}
+%\listfiles
+\usepackage[bottom=1.5in]{geometry}
+\usepackage{ulem,url}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bbold}
+\usepackage{subfig}
+    \captionsetup[subfloat]{hangindent=12pt,margin=12pt}
+\usepackage{epic}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{pifont}
+\usepackage{graphicx}
+\usepackage[sectionbib]{chapterbib}
+%\usepackage[framed]{ntheorem}
+\usepackage{boxedminipage}
+\usepackage{framed}
+\usepackage{paralist}
+\usepackage{textcomp}
+\usepackage{answers}
+    \Newassociation{solmatlab}{Solution}{MatlabSolutions}
+    \Newassociation{solstavar}{Solution}{StaVarSolutions}
+    \Newassociation{solmodsim}{Solution}{ModSimSolutions}
+    \Newassociation{solposcon}{Solution}{PosConSolutions}
+
+\title{EE 351L\\
+        Laboratory Manual\\
+        Second Edition}
+\author{K. Clay McKell}
+
+%%%%%%%%%%%%%%%%%%%%%
+% INCLUDEONLY OPTION
+%\includeonly{AppSta}
+%
+% 1. Matlab = MATLAB Structure and Use
+% 2. StaVar = State Variable Modeling
+% 3. ModSim = Modeling and Digital Simulation Case Studies
+% 4. DAQint = Intro to data acquisition and Real-time control
+% 5. ADCDAC = Op-Amp, A/D, D/A, and Compensator Emulation
+% 6. PosCon = Servo Position Control design project (Position and Rate % % % % %               Feedbacks)
+% 7. VelCon = Speed control design project (velocity feedback)
+% 8. PDCont = Position control design project (PD Controller---Root locus % % % %               design)
+% 9. PhasLd = Position control design project (Phase lead controller---root % % %               locus design)
+%10. BallBm = Ball and Beam design project
+% A. AppMAT = MATLAB Overview
+% B. AppSta = Basics of State Space Modeling
+% C. Soluns = Solutions
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+% Graphics Search Path
+\graphicspath{{RAW/}}
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+% PAGE STYLE OPTIONS
+\pagestyle{headings}
+\addtolength{\headsep}{.15in}
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+% FIGURE FORMAT OPTION
+%\setcounter{topnumber}{1}
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+% FRAME BOX OPTIONS
+\addtolength{\fboxrule}{0.5pt}
+\addtolength{\fboxsep}{4pt}
+\setlength{\FrameSep}{\fboxsep}
+\setlength{\FrameRule}{\fboxrule}
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+% USER-DEFINED ENVIRONMENTS
+%\newenvironment{codex}{
+%    \vspace{6pt}
+%    \begin{minipage}{.95\textwidth}
+%    \textit{Example Code:}\\[2pt]
+%    \phantom{nine} \begin{boxedminipage}{.9\textwidth}
+%    }
+%    {\end{boxedminipage}
+%    \end{minipage}
+%    \vspace{6pt}
+%    }
+
+\DefineVerbatimEnvironment{codex}{Verbatim}
+    {frame=single,
+        framesep=8pt,
+        label=\raisebox{-1.3ex}{\rmfamily{\textit{Example Code:}}},
+        xleftmargin=0.075\textwidth,
+        xrightmargin=0.075\textwidth
+        }
+%---NOTE---
+% Should you come across commands of the form:
+%   \vspace{6pt}
+%   \begin{minipage}{.95\textwidth}
+%   \textit{Example Code:}\\[2pt]
+%   \phantom{nine} \begin{boxedminipage}{.9\textwidth}
+%   \begin{verbatim}
+%       TEXT
+%   \end{verbatim}
+%   \end{boxedminipage}
+%   \end{minipage}\\[6pt]
+% This set of commands is deprecated.  Please replace the with a single codex environment.
+
+\newcounter{example}[chapter]
+\setcounter{example}{0}
+\renewcommand{\theexample}{\thechapter.\arabic{example}}
+
+\newcounter{case}[chapter]
+\setcounter{case}{0}
+\newenvironment{casestudy}[1]{ %
+    \refstepcounter{case}
+    \noindent
+    \textbf{Case Study \thecase:} \\
+    \textbf{#1}
+    \newline}
+    {}
+
+%\theoremclass{Theorem}
+%\theoremstyle{change}
+%\theorembodyfont{\upshape}
+%\theoremsymbol{\ensuremath{\ast}}
+%\theoremseparator{}
+%\newframedtheorem{Example}[example]{Example}
+
+%\newcommand{\TitleFrame}[2]{%
+%\fboxrule=\FrameRule
+%\fboxsep=\FrameSep
+%\vbox{\nobreak \vskip -0.7\FrameSep
+%\rlap{\strut#1}\nobreak\nointerlineskip% left justified
+%\vskip 0.7\FrameSep
+%\noindent\fbox{#2}}}
+%
+%\newenvironment{workex}[1]{%
+%\refstepcounter{example}
+%\def\FrameFirst{\textit{#1}}%
+%\def\FrameCont{\FrameFirst (cont.)}%
+%\def\FrameCommand##1{%
+%\TitleFrame{\FrameCurrent}{##1}
+%\global\let\FrameCurrent\FrameCont
+%\global\let\FrameNext\FrameCont
+%}%
+%\global\let\FrameCurrent\FrameFirst
+%\global\let\FrameNext\FrameFirst
+%\MakeFramed{\hsize\textwidth
+%\advance\hsize -2\FrameRule
+%\advance\hsize -2\FrameSep
+%\FrameRestore}}%
+%{\endMakeFramed}
+%
+\newenvironment{workex}{
+    \refstepcounter{example}
+\setlength{\topsep}{0pt}
+    \begin{minipage}{.95\textwidth}
+   \noindent
+    \textit{Example \theexample}
+    \\[2pt]
+    \phantom{nine} \begin{boxedminipage}{.9\textwidth}
+%    \begin{framed}
+ %        \setlength{\hsize}{.9\textwidth}
+ %  \MakeFramed{\setlength{\hsize}{.9\textwidth}\FrameRestore}
+   }
+   {
+    \end{boxedminipage}
+%   \end{framed}
+ %  \endMakeFramed
+    \end{minipage}
+    \vspace{6pt}
+   }
+%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\tableofcontents
+\include{Matlab}
+\include{StaVar}
+\include{ModSim}
+\include{DAQint}
+\include{ADCDAC}
+\include{PosCon}
+\include{VelCon}
+\include{PDCont}
+\include{PhasLd}
+\include{BallBm}
+\appendix
+\include{AppMAT}
+\include{AppSta}
+\include{Soluns}
+
+\end{document}
+
